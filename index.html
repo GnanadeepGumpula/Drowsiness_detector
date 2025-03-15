@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Drowsiness Detection</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="error-container" class="hidden">
+        <div class="error-alert">
+            <i class="fas fa-exclamation-circle"></i>
+            <div>
+                <h3>Error</h3>
+                <p id="error-message"></p>
+            </div>
+        </div>
+    </div>  
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2"></path>
+            <path d="M12 20v2"></path>
+            <path d="m4.93 4.93 1.41 1.41"></path>
+            <path d="m17.66 17.66 1.41 1.41"></path>
+            <path d="M2 12h2"></path>
+            <path d="M20 12h2"></path>
+            <path d="m6.34 17.66-1.41 1.41"></path>
+            <path d="m19.07 4.93-1.41 1.41"></path>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+        </svg>
+    </button>
+    <main class="container">
+        <div class="header">
+            <h1>Driver Drowsiness Detection</h1>
+            <p>Advanced real-time monitoring system that detects signs of driver fatigue and drowsiness using computer vision and machine learning.</p>
+        </div>
+        <div class="grid">
+            <div class="card1">
+                <h2>Camera Feed</h2>
+                <div class="camera-container">
+                  <div id="camera-placeholder">
+                    <i class="fas fa-camera"></i>
+                    <p>Camera is off</p>
+                  </div>
+                  <video id="webcam" autoplay playsinline muted></video>
+                </div>
+                <button id="detection-toggle" class="start-btn">
+                  <i class="fas fa-power-off"></i>
+                  <span>Start Detection</span>
+                </button>
+              </div>
+            <div class="status-container">
+                <div class="card1">
+                    <h2>Status</h2>
+                    <div id="status-indicator" class="status idle">
+                        <div class="status-icon">
+                        <i class="fas fa-coffee"></i>
+                        </div>
+                        <div class="status-text">
+                        <h3>System Idle</h3>
+                        <p>Start the detection to monitor drowsiness.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Detection Status</h2>
+                    <div class="status-grid">
+                        <div class="status-item">
+                            <div class="status-label">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                <span>Drowsiness</span>
+                            </div>
+                            <span class="status-badge" id="drowsinessStatus">Normal</span>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-label">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                                </svg>
+                                <span>Yawning</span>
+                            </div>
+                            <span class="status-badge" id="yawningStatus">Normal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card warning-card">
+                    <div class="warning-content">
+                        <svg class="warning-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                        <div>
+                            <h3>How it works</h3>
+                            <p>
+                            This system uses computer vision to detect signs of drowsiness and yawning by analyzing facial landmarks.
+                            When signs of fatigue are detected, an alert is triggered.
+                            </p>
+                            <ul>
+                            <li>Eye aspect ratio (EAR) is used to detect drowsiness</li>
+                            <li>Mouth aspect ratio (MAR) is used to detect yawning</li>
+                            <li>Real-time alerts are provided when fatigue is detected</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </main>
+    <script src="script4.js"></script>
+</body>
+</html>
